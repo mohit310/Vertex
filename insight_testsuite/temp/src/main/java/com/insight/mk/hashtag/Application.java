@@ -20,14 +20,18 @@ public class Application {
 
     private static final long MINUTE = 60 * 1000;
 
-    private static final String inputFile = "tweet_input/tweets_large.txt";
-    private static final String outputFile = "tweet_output/output.txt";
+    private static String inputFile = "tweet_input/tweets_large.txt";
+    private static String outputFile = "tweet_output/output.txt";
 
     private Map<String, Edge> hashtagGraph = new HashMap<>();
     private Map<Long, String[]> timeSeries = new TreeMap<>();
     private long maxTimestamp;
 
     public static void main(String[] args) throws Exception {
+        if (args.length == 2) {
+            inputFile = args[0];
+            outputFile = args[1];
+        }
         Application app = new Application();
         app.run();
     }

@@ -10,6 +10,8 @@ GRADER_ROOT=$(dirname ${BASH_SOURCE})
 
 PROJECT_PATH=${GRADER_ROOT}/..
 
+echo $PROJECT_PATH
+
 function print_dir_contents {
   local proj_path=$1
   echo "Project contents:"
@@ -45,6 +47,7 @@ function setup_testing_input_output {
   mkdir -p ${TEST_OUTPUT_PATH}
 
   cp -r ${PROJECT_PATH}/src ${TEST_OUTPUT_PATH}
+  cp -r ${PROJECT_PATH}/target ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/run.sh ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/tweet_input ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/tweet_output ${TEST_OUTPUT_PATH}
