@@ -11,7 +11,7 @@ public class Graph {
     private static final long MINUTE = 60 * 1000;
 
     private Map<String, Edge> hashtagGraph = new HashMap<>();
-    private Map<Long, List<String>> timeSeries = new LinkedHashMap<>();
+    private List<Tweet> timeSeries = new ArrayList<>();
     private long maxTimestamp = Long.MIN_VALUE;
 
     public double calculateAverage() throws Exception {
@@ -42,7 +42,7 @@ public class Graph {
         }
         List<String> tags = tweet.getHashTags();
         if (tags != null && tags.size() > 1) {
-            timeSeries.put(createdAt, tags);
+            timeSeries.add(tweet);
             for (int i = 0; i < tags.size(); i++) {
                 int next = ((i + 1) == tags.size()) ? 0 : (i + 1);
                 String vertex1 = tags.get(i);
@@ -68,10 +68,10 @@ public class Graph {
 
     private void deleteBefore60Seconds(long createdAt) {
         long createdAtMinus60 = createdAt - MINUTE;
-        for (Iterator<Map.Entry<Long, List<String>>> it = timeSeries.entrySet().iterator(); it.hasNext(); ) {
-            Map.Entry<Long, List<String>> timeSeriesData = it.next();
-            long createdAtFromTimeSeries = timeSeriesData.getKey();
-            List<String> tags = timeSeriesData.getValue();
+        for (Iterator<Tweet> it = timeSeries.iterator(); it.hasNext(); ) {
+            Tweet timeSeriesTweet = it.next();
+            long createdAtFromTimeSeries = timeSeriesTweet.getCreatedAt();
+            List<String> tags = timeSeriesTweet.getHashTags();
             if (createdAtFromTimeSeries < createdAtMinus60) {
                 it.remove();
                 if (tags.size() > 1) {

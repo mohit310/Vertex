@@ -45,12 +45,28 @@ public class Tweet implements Serializable {
 
         Tweet tweet = (Tweet) o;
 
-        return createdAt == tweet.createdAt;
+        if (createdAt != tweet.createdAt) return false;
+        return checkifTagsSame(tweet);
 
+    }
+
+    private boolean checkifTagsSame(Tweet otherTweet) {
+        List<String> otherTags = otherTweet.getHashTags();
+        if (otherTags == null && hashTags == null) return true;
+        if (otherTags != null && hashTags == null) return false;
+        if (otherTags != null && hashTags != null) {
+            if(otherTags.size() != hashTags.size()) return false;
+            for (String otherHashtag : otherTags) {
+                if (!hashTags.contains(otherHashtag)) return false;
+            }
+        }
+        return true;
     }
 
     @Override
     public int hashCode() {
-        return (int) (createdAt ^ (createdAt >>> 32));
+        int result = (int) (createdAt ^ (createdAt >>> 32));
+        result = 31 * result + (hashTags != null ? hashTags.hashCode() : 0);
+        return result;
     }
 }
