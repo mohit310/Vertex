@@ -14,9 +14,17 @@ import java.util.List;
 
 /**
  * Created by mk on 3/31/16.
+ * This class is used to parse Tweeter feed and return a list of tweets based on input file passed
  */
 public class TweetsParser {
 
+    /**
+     * Static method to parse the tweeter json file and return a list of Tweet objects
+     *
+     * @param inputFile Tweeter JSON file
+     * @return list of tweet objects
+     * @throws Exception
+     */
     public static List<Tweet> getAllTweets(String inputFile) throws Exception {
         Gson gson = new Gson();
         List<Tweet> tweets = new ArrayList<>();
@@ -45,7 +53,6 @@ public class TweetsParser {
                 line = reader.readLine();
             }
         } catch (Exception e) {
-            e.printStackTrace();
             throw new RuntimeException(e);
         }
         return tweets;

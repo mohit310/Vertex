@@ -6,9 +6,13 @@ import java.util.List;
 
 /**
  * Created by mk on 3/30/16.
+ *
+ * This is the main application which is called by script run.sh
+ * @Todo - Cleanup all system outs
  */
 public class Application {
 
+    //Default values for input/output file
     private static String inputFile = "tweet_input/tweets.txt";
     private static String outputFile = "tweet_output/output.txt";
 
@@ -32,7 +36,7 @@ public class Application {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
             for (Tweet tweet : tweets) {
                 String average = processTweet(tweet);
-                System.out.println(average);
+                //System.out.println(average);
                 writer.write(average);
                 writer.newLine();
                 writer.flush();

@@ -8,24 +8,42 @@ import java.util.List;
 /**
  * Created by mk on 3/30/16.
  */
-public class Tweet implements Serializable {
+public class Tweet {
+
     private long createdAt;
     private List<String> hashTags = new ArrayList<>();
 
+    /**
+     * Constructor to create a new Tweet. Once constructed the tweet object is unmodifiable
+     * @param createdAt
+     * @param hashTags
+     */
     public Tweet(long createdAt, List<String> hashTags) {
         this.createdAt = createdAt;
         if (hashTags != null)
             this.hashTags.addAll(hashTags);
     }
 
+    /**
+     * Method to add a new hashtag to existing list
+     * @param tag
+     */
     public void addHashtag(String tag) {
         hashTags.add(tag);
     }
 
+    /**
+     * returns timestamp of creation
+     * @return
+     */
     public long getCreatedAt() {
         return createdAt;
     }
 
+    /**
+     * returns a copy of all hashtags
+     * @return
+     */
     public List<String> getHashTags() {
         return Collections.unmodifiableList(hashTags);
     }

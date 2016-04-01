@@ -5,16 +5,26 @@ import java.util.*;
 
 /**
  * Created by mk on 3/31/16.
+ * This class is used to maintain the graph which is updated on every tweet as well as responsible for checking
+ * and removing older entries from list and graph if more than 60 seconds.
  */
 public class Graph {
 
+    //MINUTE in MILLISECONDS
     private static final long MINUTE = 60 * 1000;
 
+    //This map stores our edges to calculate the degree of the edges
     private Map<String, Edge> hashtagGraph = new HashMap<>();
+    //This list stores all our tweets in the order we receive it. This is used to cleanup the unwanted edges for old tweets
     private List<Tweet> timeSeries = new ArrayList<>();
+    //This is the timestamp which is managed to check if 1 minute has elapsed when streaming tweets
     private long maxTimestamp = Long.MIN_VALUE;
 
-    public double calculateAverage() throws Exception {
+    /**
+     * This method calculates the average of total degree based on current graph dynamics
+     * @return degree average
+     */
+    public double calculateAverage() {
         Set<Map.Entry<String, Edge>> entrySet = hashtagGraph.entrySet();
         int totalNodes = entrySet.size();
         int totalDegree = 0;
@@ -31,7 +41,12 @@ public class Graph {
         return 0.00;
     }
 
-    public void addToGraph(Tweet tweet) throws Exception {
+    /**
+     * This method takes a new Tweet and updates the graph edges based on connectivity
+     * It compares the maxtimestamp with created_at timestamp from new tweet and decides if it needs to delete old records
+     * @param tweet
+     */
+    public void addToGraph(Tweet tweet) {
         System.out.println(tweet);
         long createdAt = tweet.getCreatedAt();
         maxTimestamp = (maxTimestamp == Long.MIN_VALUE) ? createdAt : maxTimestamp;
@@ -52,7 +67,7 @@ public class Graph {
             }
         }
     }
-
+    //Convenience method to update edges for new tweet
     private void addOrUpdate(long createdAt, String vertex1, String vertex2) {
         Edge edge = hashtagGraph.get(vertex1);
         if (edge == null) {
@@ -66,6 +81,7 @@ public class Graph {
         }
     }
 
+    //Convenience method to delete all records from timeseries list and remove unwanted edges from graphs
     private void deleteBefore60Seconds(long createdAt) {
         long createdAtMinus60 = createdAt - MINUTE;
         for (Iterator<Tweet> it = timeSeries.iterator(); it.hasNext(); ) {
@@ -87,6 +103,7 @@ public class Graph {
         }
     }
 
+    //Convenience method to remove edge. Workds in conjunction from above method.
     private void removeEdge(long createdAt, String vertex1, String vertex2) {
         Edge edge = hashtagGraph.get(vertex1);
         if (edge != null) {
