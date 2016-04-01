@@ -18,7 +18,7 @@ public class TestTimeSeriesDeleteTweets {
         Tweet tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), Arrays.asList("Spark", "Apache"));
         String average = application.processTweet(tweet);
         assertEquals("1.00", average);
-        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:12 +0000 2016"), Arrays.asList("Hadoop", "Apache"));
+        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:53:12 +0000 2016"), Arrays.asList("Hadoop", "Apache"));
         average = application.processTweet(tweet);
         assertEquals("1.00", average);
     }
