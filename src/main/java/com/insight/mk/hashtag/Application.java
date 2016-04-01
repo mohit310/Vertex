@@ -6,8 +6,9 @@ import java.util.List;
 
 /**
  * Created by mk on 3/30/16.
- *
+ * <p>
  * This is the main application which is called by script run.sh
+ *
  * @Todo - Cleanup all system outs
  */
 public class Application {
@@ -17,15 +18,6 @@ public class Application {
     private static String outputFile = "tweet_output/output.txt";
 
     private Graph graph = new Graph();
-
-    public static void main(String[] args) throws Exception {
-        if (args.length == 2) {
-            inputFile = args[0];
-            outputFile = args[1];
-        }
-        Application app = new Application();
-        app.run();
-    }
 
     private void run() throws Exception {
         List<Tweet> tweets = TweetsParser.getAllTweets(inputFile);
@@ -48,6 +40,15 @@ public class Application {
         graph.addToGraph(tweet);
         double avg = graph.calculateAverage();
         return String.format("%.2f", avg);
+    }
+
+    public static void main(String[] args) throws Exception {
+        if (args.length == 2) {
+            inputFile = args[0];
+            outputFile = args[1];
+        }
+        Application app = new Application();
+        app.run();
     }
 
 
