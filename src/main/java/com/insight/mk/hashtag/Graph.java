@@ -5,8 +5,8 @@ import java.util.*;
 
 /**
  * Created by mk on 3/31/16.
- * This class is used to maintain the graph which is updated on every tweet as well as responsible for checking
- * and removing older entries from list and graph if more than 60 seconds.
+ * This class is used to maintain the graph of the hashtags which is updated on every tweet as well as responsible for checking
+ * and removing older entries from graph if more than 60 seconds old.
  */
 public class Graph {
 
@@ -15,13 +15,15 @@ public class Graph {
 
     //This map stores our edges to calculate the degree of the edges
     private Map<String, Edge> hashtagGraph = new HashMap<>();
+
     //This list stores all our tweets in the order we receive it. This is used to cleanup the unwanted edges for old tweets
     private List<Tweet> timeSeries = new ArrayList<>();
+
     //This is the timestamp which is managed to check if 1 minute has elapsed when streaming tweets
     private long maxTimestamp = Long.MIN_VALUE;
 
     /**
-     * This method calculates the average of total degree based on current graph dynamics
+     * This method calculates the average of total degree based on current graph tree
      * @return degree average
      */
     public double calculateAverage() {
