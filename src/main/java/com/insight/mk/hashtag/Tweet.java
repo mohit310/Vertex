@@ -1,17 +1,18 @@
 package com.insight.mk.hashtag;
 
 import java.io.Serializable;
-import java.util.Set;
-import java.util.LinkedHashSet;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Created by mk on 3/30/16.
  */
 public class Tweet implements Serializable {
     private long createdAt;
-    private Set<String> hashTags = new LinkedHashSet<>();
+    private List<String> hashTags = new ArrayList<>();
 
-    public Tweet(long createdAt, Set<String> hashTags) {
+    public Tweet(long createdAt, List<String> hashTags) {
         this.createdAt = createdAt;
         if (hashTags != null)
             this.hashTags.addAll(hashTags);
@@ -25,8 +26,8 @@ public class Tweet implements Serializable {
         return createdAt;
     }
 
-    public Set<String> getHashTags() {
-        return hashTags;
+    public List<String> getHashTags() {
+        return Collections.unmodifiableList(hashTags);
     }
 
     @Override

@@ -16,16 +16,16 @@ public class TestOutofTimeOrderTweets {
     @Test
     public void testTweet() throws Exception {
         Application application = new Application();
-        Tweet tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), new LinkedHashSet<String>(Arrays.asList("Spark", "Apache")));
+        Tweet tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), Arrays.asList("Spark", "Apache"));
         String average = application.processTweet(tweet);
         assertEquals("1.00", average);
-        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:12 +0000 2016"), new LinkedHashSet<String>(Arrays.asList("Hadoop", "Apache")));
+        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:12 +0000 2016"), Arrays.asList("Hadoop", "Apache"));
         average = application.processTweet(tweet);
         assertEquals("1.00", average);
-        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), new LinkedHashSet<String>(Arrays.asList("Reject", "Now")));
+        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), Arrays.asList("Reject", "Now"));
         average = application.processTweet(tweet);
         assertEquals("1.00", average);
-        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:10 +0000 2016"), new LinkedHashSet<String>(Arrays.asList("Accept", "Now")));
+        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:10 +0000 2016"), Arrays.asList("Accept", "Now"));
         average = application.processTweet(tweet);
         assertEquals("1.00", average);
     }
