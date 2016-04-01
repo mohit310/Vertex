@@ -29,11 +29,11 @@ function find_file_or_dir_in_project {
 
 # check project directory structure
 function check_project_struct {
+  find_file_or_dir_in_project ${PROJECT_PATH} pom.xml
   find_file_or_dir_in_project ${PROJECT_PATH} run.sh
   find_file_or_dir_in_project ${PROJECT_PATH} src
   find_file_or_dir_in_project ${PROJECT_PATH} tweet_input
   find_file_or_dir_in_project ${PROJECT_PATH} tweet_output
-  find_file_or_dir_in_project ${PROJECT_PATH} target
 }
 
 # setup testing output folder
@@ -45,8 +45,8 @@ function setup_testing_input_output {
 
   mkdir -p ${TEST_OUTPUT_PATH}
 
+  cp -r ${PROJECT_PATH}/pom.xml ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/src ${TEST_OUTPUT_PATH}
-  cp -r ${PROJECT_PATH}/target ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/run.sh ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/tweet_input ${TEST_OUTPUT_PATH}
   cp -r ${PROJECT_PATH}/tweet_output ${TEST_OUTPUT_PATH}
