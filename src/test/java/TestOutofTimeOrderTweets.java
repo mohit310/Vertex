@@ -25,8 +25,8 @@ public class TestOutofTimeOrderTweets {
         tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), Arrays.asList("Reject", "Now"));
         average = application.processTweet(tweet);
         assertEquals("1.00", average);
-        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:10 +0000 2016"), Arrays.asList("Accept", "Now"));
+        tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:52:10 +0000 2016"), Arrays.asList("Apache", "Spark"));
         average = application.processTweet(tweet);
-        assertEquals("1.00", average);
+        assertEquals("1.33", average);
     }
 }
