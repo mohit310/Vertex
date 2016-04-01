@@ -12,11 +12,11 @@ import static org.junit.Assert.assertEquals;
 /**
  * Created by mk on 3/31/16.
  */
-public class TestSameHashtagInTweet {
+public class TestOneHashtagInTweet {
 
     @Test
     public void testTweet() throws Exception {
-        Tweet tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), new LinkedHashSet<>(Arrays.asList("same", "same")));
+        Tweet tweet = new Tweet(DateUtil.getLongTimestamp("Thu Mar 24 17:51:10 +0000 2016"), Arrays.asList("same"));
         Application application = new Application();
         String average = application.processTweet(tweet);
         assertEquals("0.00", average);
