@@ -29,15 +29,15 @@ public class Application {
     }
 
     public void processTweets(List<Tweet> tweets) throws Exception {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile));
-        for (Tweet tweet : tweets) {
-            String average = processTweet(tweet);
-            System.out.println(average);
-            writer.write(average);
-            writer.newLine();
-            writer.flush();
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(outputFile))) {
+            for (Tweet tweet : tweets) {
+                String average = processTweet(tweet);
+                System.out.println(average);
+                writer.write(average);
+                writer.newLine();
+                writer.flush();
+            }
         }
-        writer.close();
     }
 
     public String processTweet(Tweet tweet) throws Exception {
