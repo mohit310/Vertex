@@ -101,6 +101,7 @@ public class Graph {
                         removeEdge(createdAtFromTimeSeries, vertex2, vertex1);
                     }
                 }
+                timeSeriesTweet = null;
             }
         }
     }
